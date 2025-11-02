@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Update Contact</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-3 ml-3 mb-3">
+			<div class="card-body">
+				<h1 class="text-center">Update Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<form action="#" th:object="${contact}"
+								enctype="multipart/form-data" method="post"
+								th:action="@{/user/update-contact}" class="mt-2">
+
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">ID</div>
+									</div>
+									<!-- visible label for user -->
+									<label class="form-control" th:text="${contact.cId}"></label>
+
+									<!-- hidden input to send value to controller -->
+									<input type="hidden" id="ID" name="cId"
+										th:value="${contact.cId}" />
+								</div>
+
+
+
+								<!-- First Name -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-plus"></i>
+										</div>
+									</div>
+									<input required type="text" id="firstName" name="name"
+										th:value="${contact.name}" placeholder="Enter Name here"
+										class="form-control">
+								</div>
+
+								<!-- Second Name -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fas fa-user-alt"></i>
+										</div>
+									</div>
+									<input type="text" id="secondName" name="secondName"
+										th:value="${contact.secondName}"
+										placeholder="Enter Nick Name here" class="form-control">
+								</div>
+
+								<!-- Phone -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-phone"></i>
+										</div>
+									</div>
+									<input required type="number" id="phone" name="phone"
+										th:value="${contact.phone}"
+										placeholder="Enter Phone Number here" class="form-control">
+								</div>
+
+
+								<!-- Email -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">@</div>
+									</div>
+									<input required type="email" id="email" name="email"
+										th:value="${contact.email}" placeholder="Enter Email here"
+										class="form-control">
+								</div>
+
+								<!-- Work -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="fa fa-briefcase"></i>
+										</div>
+									</div>
+									<input required type="text" id="work" name="work"
+										th:value="${contact.work}" placeholder="Enter Work here"
+										class="form-control">
+								</div>
+
+								<!-- Description -->
+								<div class="form-group mt-3">
+									<textarea id="mytextarea"
+										placeholder="Enter Contact Description" name="description"
+										rows="10" th:text="${contact.description}"
+										class="form-control"></textarea>
+								</div>
+
+
+								<!-- Image -->
+								<div class="container text-center">
+									<img style="height: 250px; width: 250px;"
+										class="img-fluid my_profile_picture"
+										th:src="@{'/img/'+${contact.imageUrl}}" alt="profileImage">
+								</div>
+								<p class="text-secondary">Choose new profile picture</p>
+								<div class="custom-file">
+									<input type="file" name="profileImage" />
+								</div>
+
+								<div class="container text-center">
+									<button class="btn btn-outline-primary">Save Contact</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script
+			src="https://cdn.tiny.cloud/1/4tx9l37oejaxecoxg6lv090bjjopg1b6ns28ged4v1ivme3e/tinymce/8/tinymce.min.js"
+			referrerpolicy="origin" crossorigin="anonymous"></script>
+		<script>
+			tinymce.init({
+				selector : '#mytextarea'
+			});
+		</script>
+	</section>
+</body>
+</html>
