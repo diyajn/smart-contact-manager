@@ -12,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 
 
@@ -28,8 +30,11 @@ public class User {
 	@NotBlank(message = "Name field is required!!")
 	@Size(min = 2,max = 20,message = "min 2 and max 20 characters are allowed!!")
 	private String name;
+	@NotBlank(message = "Email field is required!!")
 	@Column(unique = true)
+	@Email(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid Email!!")
 	private String email;
+	@NotBlank(message = "Password field is required!!")
 	private String password;
 	private String role;
 	private boolean enabled;
@@ -104,8 +109,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
-				+ "]";
+				+ ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about +"]";
 	}
 	
 	

@@ -17,8 +17,6 @@ import com.smart.dao.UserRepository;
 import com.smart.entities.User;
 import com.smart.helper.Message;
 
-
-
 @Controller
 public class HomeController {
 
@@ -40,7 +38,6 @@ public class HomeController {
 		return "about";
 	}
 	
-	
 	@RequestMapping("/signup")
 	public String signup(HttpSession session, Model model) {
 	    Object msg = session.getAttribute("message");
@@ -53,51 +50,45 @@ public class HomeController {
 		return "signup";
 	}
 
-	
-	
-	
-	
+	@RequestMapping("/signin")
+	public String CustomLogin( Model model) {
+	    model.addAttribute("title","Login - Smart Contact Manager");
+		return "login";
+	}
 	
 	@RequestMapping(value = "/do_register", method = RequestMethod.POST)
 	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session) {
-		
+			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m,
+			HttpSession session) {
 		try {
-			if(!agreement) {     //agreement check nhi kra
-				System.out.println("you have not agreed the terms and conditions");
-				throw new Exception("you have not agreed the terms and conditions");  //catch block chl jayega
+		
+			if (!agreement) { // agreement check nhi kra
+				throw new Exception("you have not agreed the terms and conditions"); // catch block chl jayega
 			}
-			
-			if(result.hasErrors()) {
-				System.out.println("error:"+result.toString());
-				m.addAttribute("user",user);
+
+			if (result.hasErrors()) {
+				System.out.println("error happening!!");
+				System.out.println(result.toString());
+				m.addAttribute("user", user); //purani fields
 				return "signup";
 			}
-			
-			System.out.println(agreement);
-			System.out.println(user  );
-			
+		
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
 			user.setImageUrl("default.png");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
-			
-			
-			
-			
-			userRepository.save(user);
-			m.addAttribute("user",new User());  //after saving form khali hojayega
-			session.setAttribute("message", new Message("Successfully Registered!!","alert-success"));
+
+			userRepository.save(user); //save to database
+			m.addAttribute("user", new User()); // after saving form khali hojayega
+			session.setAttribute("message", new Message("Successfully Registered!!", "alert-success"));
 			return "signup";
 			
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			m.addAttribute("user",user);
-			session.setAttribute("message", new Message("Something went wrong! "+e.getMessage(),"alert-danger"));
+			m.addAttribute("user", user); //purani fields
+			session.setAttribute("message", new Message("Something went wrong! " + e.getMessage(), "alert-danger"));
 			return "signup";
 		}
-		
-		
 	}
 	
 }

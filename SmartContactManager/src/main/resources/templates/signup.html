@@ -9,11 +9,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-					<div class="mycard mt-2">
+					<div class="mycard mt-2 mb-2">
 
-						<div th:if="${session.message}" th:classappend="${session.message.type}"
-							class="alert" role="alert">
-							<p class="text-center" th:text="${session.message.content}"></p>
+						<!-- for error message -->
+						<div th:if="${session.message}"
+							 th:classappend="${session.message.type}" class="alert"
+							 role="alert">
+							 <p class="text-center" th:text="${session.message.content}"></p>
+							 <th:block th:text="${#session.removeAttribute('message')}"></th:block>
 						</div>
 
 
@@ -42,17 +45,24 @@
 							<!-- email field -->
 							<div class="form-group">
 								<label for="email_field">Your Email</label> <input type="email"
-									name="email" class="form-control" id="email_field"
+									name="email" class="form-control" 
+									th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+									id="email_field"
 									aria-describedby="emailHelp" placeholder="Enter here"
-									th:value="${user.email}" required>
+									th:value="${user.email}" required/>
+									<!-- error div -->
+								<div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}"></div>
 							</div>
 
 							<!-- password field -->
 							<div class="form-group">
 								<label for="password_field">Your Password</label> <input
 									name="password" type="password" class="form-control"
+									th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
 									id="password_field" aria-describedby="emailHelp"
 									placeholder="Enter here" required>
+									<!-- error div -->
+								<div class="invalid-feedback" th:each="e: ${#fields.errors('password')}" th:text="${e}"></div>
 							</div>
 
 							<!-- about field -->
