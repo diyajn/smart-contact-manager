@@ -48,7 +48,7 @@ SCM follows the MVC (Model-View-Controller) architecture:
 #### Clone the Repository
 
 ```bash
-git clone https://github.com/diyajn/smart-contact-manager.git)
+git clone https://github.com/diyajn/smart-contact-manager.git
 ````
 
 #### Configure the Database
