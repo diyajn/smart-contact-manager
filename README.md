@@ -79,7 +79,7 @@ http://localhost:8080
 
 ## Entity Relationship Diagram
 
-![ER Diagram](images/er-diagram.png)
+![ER Diagram](SmartContactManager/images/er-diagram.png)
 
 ## Contribution
 
