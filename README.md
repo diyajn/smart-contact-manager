@@ -85,5 +85,3 @@ http://localhost:8080
 
 Contributions are welcome. Feel free to fork the repository, raise issues, or submit pull requests to improve Smart Contact Manager.
 
-```
-```
